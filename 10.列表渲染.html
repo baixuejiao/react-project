@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 用来编译JSX -->
+  <script src="./js/browser.min.js"></script>
+  <!-- react核心库 -->
+  <script src="./js/react.development.js"></script>
+  <!-- 用于渲染组件的 依赖react.js  -->
+  <script src="./js/react-dom.development.js"></script>
+  <script type="text/babel">
+    class Com extends React.Component{
+      constructor(params) {
+        super(params)
+       
+      }
+
+      // 列表渲染时通常使用map()
+      // 渲染时需要添加一个key, key是帮助react识别具体哪些元素改变了
+      // key一定是唯一的 通常会选择使用数据库的id
+      render() {
+        let a = [1,2,3];
+        let arr = [];
+
+        for(let i=0; i<a.length; i++) {
+          arr[i] = <li key={i}>{a[i]}</li>
+        }
+
+        let list = [
+          {
+            name: 'qm',
+            age: 18
+          },
+          {
+            name: 'zs',
+            age: 16
+          },
+          {
+            name: 'xm',
+            age:20
+          }
+        ]
+
+
+        let list1 =list.map((item, index) => (
+          <li key={index}>{item.name}:{item.age}</li>
+        ))
+        
+        return (
+          <div>
+            <ul>
+              {arr}
+            </ul>
+
+            <ul>
+              {
+                list.map((item, index) => (
+                  <li key={index}>{item.name}:{item.age}</li>
+                ))
+              }
+            </ul>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(<Com/>, document.getElementById('root'))
+
+
+  </script>
+</body>
+</html>
